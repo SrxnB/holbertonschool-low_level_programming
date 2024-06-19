@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# Check if $CFILE variable is set
+if [ -z "$CFILE" ]; then
+    echo "Error: \$CFILE variable is not set."
+    exit 1
+fi
+
+# Check if the specified C file exists
+if [ ! -f "$CFILE" ]; then
+    echo "Error: C file '$CFILE' not found."
+    exit 1
+fi
+
+# Extract the file name without extension
+FILENAME=$(basename -- "$CFILE")
+FILENAME="${FILENAME%.*}"
+
+# Generate assembly code with GCC
+gcc -S -masm=intel "$CFILE" -o "$FILENAME.s"
+
+# Check if GCC command was successful
+if [ $? -ne 0 ]; then
+    echo "Error: Failed to generate assembly code."
+    exit 1
+fi
+
+echo "Assembly code generated successfully: $FILENAME.s"
+
