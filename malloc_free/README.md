@@ -1,0 +1,1 @@
+bos ola bilmez
