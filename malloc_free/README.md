@@ -1,1 +1,2 @@
-bos ola bilmez
+
+s olmaz
